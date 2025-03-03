@@ -25,12 +25,22 @@ The program continuously captures video frames from your webcam. These frames ar
 
 The video feed is processed at a frame rate of 15 FPS, which can be adjusted based on your system’s performance. After processing each frame, the resulting image is displayed in a window where the detected objects are highlighted.
 
-To exit the program, simply press the 'q' key.
+### Output:
 
-### Setup Instructions:
-To run the object detection script, follow these steps:
+Once you press the **'q'** key to stop the detection, the terminal will display a summary of the objects detected in the video feed, including the count of each object type detected and the average confidence score for each type. The output will look something like this:
 
-1. **Install Dependencies**:
+```plaintext
+Detection Finished. Results:
+{
+  "person": {"count": 3, "average_confidence": 0.85},
+  "car": {"count": 2, "average_confidence": 0.92},
+  "dog": {"count": 1, "average_confidence": 0.89},
+  ...
+}
+‍‍‍‍```
+. **Install Dependencies**:
    You need to install the required libraries. Run the following command to install TensorFlow, OpenCV, and NumPy:
-   ```bash
+   
+
+bash
    pip install tensorflow opencv-python numpy
