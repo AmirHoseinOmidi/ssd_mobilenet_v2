@@ -17,8 +17,7 @@ def run_inference_for_single_image(model, image):
     output_dict = {key: value.numpy() for key, value in output_dict.items()}
     return output_dict
 
-
-class_names = ["0.background" ,"1. person", "2. bicycle", "3. car", "4. motorbike", "5. airplane", "6. bus", "7. train", "8. truck", "9. boat", 
+class_names = ["0.background", "1. person", "2. bicycle", "3. car", "4. motorbike", "5. airplane", "6. bus", "7. train", "8. truck", "9. boat", 
 "10. trafficlight", "11. firehydrant", "12. streetsign", "13. stopsign", "14. parkingmeter", "15. bench", "16. bird", 
 "17. cat", "18. dog", "19. horse", "20. sheep", "21. cow", "22. elephant", "23. bear", "24. zebra", "25. giraffe", 
 "26. hat", "27. backpack", "28. umbrella", "29. shoe", "30. eyeglasses", "31. handbag", "32. tie", "33. suitcase", 
@@ -28,18 +27,15 @@ class_names = ["0.background" ,"1. person", "2. bicycle", "3. car", "4. motorbik
 "56. broccoli", "57. carrot", "58. hotdog", "59. pizza", "60. donut", "61. cake", "62. chair", "63. sofa", 
 "64. pottedplant", "65. bed", "66. mirror", "67. diningtable", "68. window", "69. desk", "70. toilet", "71. door", 
 "72. tvmonitor", "73. laptop", "74. mouse", "75. remote", "76. keyboard", "77. cellphone", "78. microwave", 
-"79. oven", "80. toaster", "81.sink" , "82, refrigerator", "83. blender", "84. book", "85, clock", "86. vase", "87. scissors",
-"88. teddybear" ,"89. hairdrier", "90. toothbrush", "91. hairbrush"
-
-]
-
+"79. oven", "80. toaster", "81.sink", "82. refrigerator", "83. blender", "84. book", "85. clock", "86. vase", "87. scissors",
+"88. teddybear", "89. hairdrier", "90. toothbrush", "91. hairbrush"]
 
 cap = cv2.VideoCapture(2)
 
-fps_limit = 15 
+fps_limit = 15
 frame_interval = int(1000 / fps_limit)
 
-output_dict = {}
+detected_objects = []  # لیستی برای ذخیره اشیاء شناسایی‌شده
 
 while True:
     start_time = time.time()
@@ -48,7 +44,6 @@ while True:
         break
 
     image_resized = cv2.resize(frame, (320, 320))
-
 
     output_dict = run_inference_for_single_image(model, image_resized)
 
@@ -75,6 +70,7 @@ while True:
                 label = f"{class_name}: {scores[i]:.2f}"
                 cv2.putText(frame, label, (startX, startY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+                detected_objects.append(f"{class_name}: {scores[i]:.2f}")
 
     cv2.imshow('Object Detection', frame)
 
@@ -90,4 +86,5 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("Detection Finished. Results:")
-print(output_dict)
+for obj in detected_objects:
+    print(obj)
