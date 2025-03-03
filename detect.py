@@ -35,7 +35,7 @@ cap = cv2.VideoCapture(2)
 fps_limit = 15
 frame_interval = int(1000 / fps_limit)
 
-detected_objects = []  # لیستی برای ذخیره اشیاء شناسایی‌شده
+detected_objects = []  
 
 while True:
     start_time = time.time()
