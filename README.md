@@ -27,6 +27,8 @@ The video feed is processed at a frame rate of 15 FPS, which can be adjusted bas
 
 ### Output:
 
+result video: https://youtu.be/bPFM69b0MGg
+
 Once you press the **'q'** key to stop the detection, the terminal will display a summary of the objects detected in the video feed, including the count of each object type detected and the average confidence score for each type. The output will look something like this:
 
 ```plaintext
