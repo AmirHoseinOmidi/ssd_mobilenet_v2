@@ -34,7 +34,7 @@ pip install tensorflow opencv-python numpy
 ‍‍‍‍‍‍‍
 🎥 Demo Video:
 
-Watch it in action: YouTube Demo
+Watch it in action: (https://youtu.be/bPFM69b0MGg)
 
 📊 Output Example
 When you quit, you'll see a summary in the terminal:
