@@ -47,11 +47,7 @@ Pretrained Model: SSD MobileNetV2 - COCO17
 
 Extract the model file and update the model_dir variable in the code with the path to where the model is stored.
 
-Run the script:
-
-python object_detection.py
-
- References
+## 📚 References
 MobileNetV2: For details on MobileNetV2, please refer to the original paper.
 
 Pretrained Model: The pretrained model used in this project was obtained from the TensorFlow Object Detection Model Zoo.
