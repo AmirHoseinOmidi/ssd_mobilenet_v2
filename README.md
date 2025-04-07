@@ -32,31 +32,30 @@ Install the required libraries:
 pip install tensorflow opencv-python numpy
 ```
 
-⚙️ Running the Code
+## ⚙️ Running the Code
+
 To run the real-time object detection, follow these steps:
 
-Ensure you have Python 3 and the necessary libraries installed (tensorflow, opencv-python, numpy).
+1. Ensure you have Python 3 and the necessary libraries installed:
 
+```bash
+pip install tensorflow opencv-python numpy
+```
 Download the pre-trained SSD MobileNetV2 model from the official TensorFlow model zoo:
 
 Pretrained Model: SSD MobileNetV2 - COCO17
 
-Extract the model file and point to the directory where it is stored in the code (model_dir).
+Extract the model file and update the model_dir variable in the code with the path to where the model is stored.
 
+Run the script:
 
-The webcam will start capturing and performing object detection in real-time. Press 'q' to exit.
+python object_detection.py
 
-📚 References
+ References
 MobileNetV2: For details on MobileNetV2, please refer to the original paper.
 
 Pretrained Model: The pretrained model used in this project was obtained from the TensorFlow Object Detection Model Zoo.
 
 🎥 Demo Video:
 
-Watch it in action: Demo Video
-
-📊 Output Example When you quit, you'll see a summary in the terminal:
-
-Detection Finished. Results: person: 0.810
-person: 0.591
-person: 0.588
+Watch it in action: https://youtu.be/bPFM69b0MGg
