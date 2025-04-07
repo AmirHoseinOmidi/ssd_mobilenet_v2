@@ -42,7 +42,7 @@ pip install tensorflow opencv-python numpy
 ```
 Download the pre-trained SSD MobileNetV2 model from the official TensorFlow model zoo:
 
-Pretrained Model: SSD MobileNetV2 - COCO17
+Pretrained Model: https://www.kaggle.com/models/tensorflow/ssd-mobilenet-v2
 
 Extract the model file and update the model_dir variable in the code with the path to where the model is stored.
 
