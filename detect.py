@@ -3,13 +3,15 @@ import tensorflow as tf
 import numpy as np
 import time
 
+# Load the pre-trained SSD MobileNetV2 model
 model_dir = '/home/amir/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/saved_model'
 model = tf.saved_model.load(model_dir)
 
+# Run inference on a single image
 def run_inference_for_single_image(model, image):
     image = np.asarray(image)
     input_tensor = tf.convert_to_tensor(image, dtype=tf.uint8)
-    input_tensor = input_tensor[tf.newaxis, ...]
+    input_tensor = input_tensor[tf.newaxis, ...]  # Add batch dimension
 
     model_fn = model.signatures["serving_default"]
     output_dict = model_fn(input_tensor)
@@ -17,6 +19,7 @@ def run_inference_for_single_image(model, image):
     output_dict = {key: value.numpy() for key, value in output_dict.items()}
     return output_dict
 
+# COCO class labels
 class_names = ["0.background", "1. person", "2. bicycle", "3. car", "4. motorbike", "5. airplane", "6. bus", "7. train", "8. truck", "9. boat", 
 "10. trafficlight", "11. firehydrant", "12. streetsign", "13. stopsign", "14. parkingmeter", "15. bench", "16. bird", 
 "17. cat", "18. dog", "19. horse", "20. sheep", "21. cow", "22. elephant", "23. bear", "24. zebra", "25. giraffe", 
@@ -30,12 +33,12 @@ class_names = ["0.background", "1. person", "2. bicycle", "3. car", "4. motorbik
 "79. oven", "80. toaster", "81.sink", "82. refrigerator", "83. blender", "84. book", "85. clock", "86. vase", "87. scissors",
 "88. teddybear", "89. hairdrier", "90. toothbrush", "91. hairbrush"]
 
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)  # Open webcam
 
-fps_limit = 15
+fps_limit = 15  # Limit FPS
 frame_interval = int(1000 / fps_limit)
 
-detected_objects = []  
+detected_objects = []  # Store detected object names
 
 while True:
     start_time = time.time()
@@ -43,8 +46,10 @@ while True:
     if not ret:
         break
 
+    # Resize frame to model input size
     image_resized = cv2.resize(frame, (320, 320))
 
+    # Run object detection
     output_dict = run_inference_for_single_image(model, image_resized)
 
     boxes = output_dict.get('detection_boxes', [])
@@ -57,27 +62,32 @@ while True:
         scores = scores[0]
 
         for i in range(len(boxes)):
-            if scores[i] > 0.5:  
+            if scores[i] > 0.5:  # Only show high confidence detections
                 y1, x1, y2, x2 = boxes[i]
 
-                (startX, startY, endX, endY) = (int(x1 * frame.shape[1]), int(y1 * frame.shape[0]),
-                int(x2 * frame.shape[1]), int(y2 * frame.shape[0]))
+                # Convert to original frame coordinates
+                (startX, startY, endX, endY) = (
+                    int(x1 * frame.shape[1]), int(y1 * frame.shape[0]),
+                    int(x2 * frame.shape[1]), int(y2 * frame.shape[0])
+                )
 
+                # Draw bounding box and label
                 cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 255, 0), 2)
-
                 class_id = classes[i]
                 class_name = class_names[class_id] if class_id < len(class_names) else "Unknown"
                 label = f"{class_name}: {scores[i]:.2f}"
                 cv2.putText(frame, label, (startX, startY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                detected_objects.append(f"{class_name}: {scores[i]:.3f}")
 
-                detected_objects.append(f"{class_name}: {scores[i]:.2f}")
+    # Show FPS
+    elapsed_time = time.time() - start_time
+    fps = 1 / elapsed_time
+    fps_text = f"FPS: {fps:.1f}"
+    cv2.putText(frame, fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
     cv2.imshow('Object Detection', frame)
 
-    elapsed_time = time.time() - start_time
-    sleep_time = frame_interval - (elapsed_time * 1000)
-    if sleep_time > 0:
-        time.sleep(sleep_time / 1000)
+    
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
@@ -85,6 +95,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
+# Print detected objects
 print("Detection Finished. Results:")
 for obj in detected_objects:
     print(obj)
