@@ -39,8 +39,7 @@ Watch it in action: (https://youtu.be/bPFM69b0MGg)
 📊 Output Example
 When you quit, you'll see a summary in the terminal:
 
-{
-  "person": {"count": 3, "average_confidence": 0.85},
-  "car": {"count": 2, "average_confidence": 0.92},
-  "dog": {"count": 1, "average_confidence": 0.89}
-}
+Detection Finished. Results:
+   person: 0.810
+   person: 0.591
+   person: 0.588
