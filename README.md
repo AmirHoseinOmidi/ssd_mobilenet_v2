@@ -32,7 +32,8 @@ Install the required libraries:
 pip install tensorflow opencv-python numpy
 ```
 ‍‍‍‍‍‍‍
-🎥 Demo Video
+🎥 Demo Video:
+
 Watch it in action: YouTube Demo
 
 📊 Output Example
