@@ -7,7 +7,6 @@ This project uses **TensorFlow** and **OpenCV** to perform real-time object dete
 - Detects over 90 object types (like people, cars, dogs)
 - Draws bounding boxes with class names and confidence scores
 - Filters out detections with confidence scores below 0.5
-- Limits frame rate to 15 FPS for smooth performance
 
 ## 🧠 Tech Used
 - **TensorFlow** – Loads and runs the SSD MobileNetV2 model
