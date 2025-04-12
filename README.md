@@ -51,6 +51,18 @@ MobileNetV2: For details on MobileNetV2, please refer to the original paper.
 
 Pretrained Model: The pretrained model used in this project was obtained from the TensorFlow Object Detection Model Zoo.
 
+## 🧪 Profiling
+
+This project includes performance profiling using Python's built-in `cProfile` and `pstats` modules.
+
+Profiling helps analyze the program’s performance by:
+- Measuring how much time is spent in each function
+- Identifying slow or resource-heavy parts of the code
+- Printing a summary of the top 30 most time-consuming function calls (sorted by cumulative time)
+
+You don’t need to install anything extra — both `cProfile` and `pstats` are included in the Python standard library.
+
+
 🎥 Demo Video:
 
 Watch it in action: https://youtu.be/bPFM69b0MGg
