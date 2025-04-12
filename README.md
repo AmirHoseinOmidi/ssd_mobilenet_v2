@@ -23,13 +23,7 @@ This project uses **TensorFlow** and **OpenCV** to perform real-time object dete
    - Displays class names and scores (if score > 0.5)
 5. Press **'q'** to stop
 
-## 📦 Installation
 
-Install the required libraries:
-
-```bash
-pip install tensorflow opencv-python numpy
-```
 
 ## ⚙️ Running the Code
 
