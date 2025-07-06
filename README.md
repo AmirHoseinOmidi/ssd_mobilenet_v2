@@ -2,7 +2,7 @@
 
 This project implements a client-server architecture for real-time object detection using **SSD MobileNetV2** with **TensorFlow** and **OpenCV**.
 
-![Demo](https://youtu.be/bPFM69b0MGg)
+
 
 ## 🔍 Project Structure
 
@@ -37,3 +37,8 @@ This project implements a client-server architecture for real-time object detect
 ### Requirements
 ```bash
 pip install tensorflow opencv-python numpy
+
+
+🎥 Demo Video:
+
+Watch it in action: https://youtu.be/bPFM69b0MGg
