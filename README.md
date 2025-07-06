@@ -1,62 +1,39 @@
-# Real-Time Object Detection with SSD MobileNetV2
+# Real-Time Object Detection Client-Server System
 
-This project uses **TensorFlow** and **OpenCV** to perform real-time object detection from a webcam using the lightweight **SSD MobileNetV2** model.
+This project implements a client-server architecture for real-time object detection using **SSD MobileNetV2** with **TensorFlow** and **OpenCV**.
 
-## 🔍 What It Does
-- Captures video from your webcam
-- Detects over 90 object types (like people, cars, dogs)
-- Draws bounding boxes with class names and confidence scores
-- Filters out detections with confidence scores below 0.5
+![Demo](https://youtu.be/bPFM69b0MGg)
 
-## 🧠 Tech Used
-- **TensorFlow** – Loads and runs the SSD MobileNetV2 model
-- **OpenCV** – Handles webcam input and drawing boxes
-- **NumPy** – Works with image data
-- **Time** – Controls frame rate
+## 🔍 Project Structure
+
+- `server.py`: Processes images using SSD MobileNetV2 model
+- `client.py`: Captures webcam frames and displays results
+
+## 🧠 Tech Stack
+
+- **TensorFlow** - Object detection model
+- **OpenCV** - Image processing and webcam capture
+- **NumPy** - Array operations
+- **Socket Programming** - Client-server communication
 
 ## ▶️ How It Works
-1. Captures frames from the webcam
-2. Resizes each frame to **320x320**
-3. Converts it to a tensor and runs it through the model
-4. If objects are detected:
-   - Draws bounding boxes
-   - Displays class names and scores (if score > 0.5)
-5. Press **'q'** to stop
 
+### System Workflow
+1. Client captures frames from webcam
+2. Frames are compressed and sent to server
+3. Server processes frames using TensorFlow model
+4. Server draws bounding boxes and labels (confidence > 0.5)
+5. Processed frames are sent back to client
+6. Client displays the annotated frames
 
+### Key Features
+- Real-time detection of 91 COCO object categories
+- Multi-threaded server handles multiple clients
+- Efficient JPEG compression for network transmission
+- Confidence threshold filtering (0.5 default)
 
-## ⚙️ Running the Code
+## ⚙️ Installation & Usage
 
-To run the real-time object detection, follow these steps:
-
-1. Ensure you have Python 3 and the necessary libraries installed:
-
+### Requirements
 ```bash
 pip install tensorflow opencv-python numpy
-```
-Download the pre-trained SSD MobileNetV2 model from the official TensorFlow model zoo:
-
-Pretrained Model: https://www.kaggle.com/models/tensorflow/ssd-mobilenet-v2
-
-Extract the model file and update the model_dir variable in the code with the path to where the model is stored.
-
-## 📚 References
-MobileNetV2: For details on MobileNetV2, please refer to the original paper.
-
-Pretrained Model: The pretrained model used in this project was obtained from the TensorFlow Object Detection Model Zoo.
-
-## 🧪 Profiling
-
-This project includes performance profiling using Python's built-in `cProfile` and `pstats` modules.
-
-Profiling helps analyze the program’s performance by:
-- Measuring how much time is spent in each function
-- Identifying slow or resource-heavy parts of the code
-- Printing a summary of the top 30 most time-consuming function calls (sorted by cumulative time)
-
-You don’t need to install anything extra — both `cProfile` and `pstats` are included in the Python standard library.
-
-
-🎥 Demo Video:
-
-Watch it in action: https://youtu.be/bPFM69b0MGg
